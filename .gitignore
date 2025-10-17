@@ -1,0 +1,36 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!gradlew
+!gradlew.bat
+
+# Logs
+*.log
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Env files
+.env
+*.local
+
+# Docker
+*.pid
+*.pid.lock
+
+# Coverage and reports
+coverage/
+test-output/
+jacoco.exec
+
+# Temporary files
+*.tmp
+*.bak
+*.swp

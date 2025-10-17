@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.5'
+    id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'org.example.eureka'
+version = '1.0.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    // ✅ Compatible Spring Cloud version for Spring Boot 3.1.x (Jakarta namespace)
+    set('springCloudVersion', "2023.0.0")
+}
+
+dependencyManagement {
+    imports {
+//        for latest version of springboot  cloud dependencies chainxa (3.x+) kina vane yo version ko chai jakarta* ho purano chai javax* thyo tei vayera
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+dependencies {
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // ✅ Eureka Server (Service Registry)
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+    implementation "org.springframework.cloud:spring-cloud-netflix-eureka-client" // ✅ recommended for UI assets
+
+
+    //  actuator for health/monitoring
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+}
+
+test {
+    useJUnitPlatform()
+}

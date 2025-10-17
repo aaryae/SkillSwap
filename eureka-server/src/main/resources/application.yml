@@ -1,0 +1,27 @@
+server:
+  port: 8761 #this is where our code runs
+
+spring:
+  application:
+    name: eureka-server # name of our application
+
+eureka:
+  client:
+    register-with-eureka: false    # server: so it should not be regeister it self
+    fetch-registry: false
+  instance:
+    hostname: localhost
+
+  # Server-side config: lease/eviction/self-preservation settings (tweak for prod)
+  server:
+    eviction-interval-timer-in-ms: 60000
+
+# Optional: expose actuator endpoints for health and info
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
