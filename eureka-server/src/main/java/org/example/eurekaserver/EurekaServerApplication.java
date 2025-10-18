@@ -1,4 +1,4 @@
-package org.example.eureka;
+package org.example.EurekaServerApplication;
 
 
 import org.springframework.boot.SpringApplication;
