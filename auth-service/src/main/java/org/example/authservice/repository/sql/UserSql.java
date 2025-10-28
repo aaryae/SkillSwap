@@ -10,6 +10,16 @@ public final class UserSql {
         RETURNING id;
     """;
 
-    
+    public static final String FIND_BY_ID = "SELECT * FROM users WHERE id = ?";
+    public static final String FIND_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
+    public static final String UPDATE_USER = """
+        UPDATE users
+        SET username = ?, bio = ?, skills_offered = ?, skill_wanted = ?, profile_image = ?, updated_at = CURRENT_TIMESTAMP
+        WHERE id = ?;
+    """;
+
+    public static final String DELETE_USER = """
+        DELETE FROM users WHERE id = ?;
+    """;
 }
 
