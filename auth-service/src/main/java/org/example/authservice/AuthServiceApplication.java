@@ -1,4 +1,4 @@
-package org.example.eurekaserver;
+package org.example.authservice;
 
 
 import org.springframework.boot.SpringApplication;
@@ -7,8 +7,9 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 @SpringBootApplication
 @EnableEurekaServer
-public class EurekaServerApplication {
+public class AuthServiceApplication {
     public static void main(String[] args) {
-            SpringApplication.run(EurekaServerApplication.class, args);
+        SpringApplication.run(AuthServiceApplication.class, args);
+
         }
     }

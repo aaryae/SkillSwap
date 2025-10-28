@@ -35,7 +35,7 @@ dependencies {
 
     // ✅ Eureka Server (Service Registry)
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
-    implementation "org.springframework.cloud:spring-cloud-netflix-eureka-client" // ✅ recommended for UI assets
+    implementation "org.springframework.cloud:spring-cloud-netflix-eureka-client" // recommended for UI of ureka
 
 
     //  actuator for health/monitoring

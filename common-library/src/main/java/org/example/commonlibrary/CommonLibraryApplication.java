@@ -1,4 +1,4 @@
-package org.example.eurekaserver;
+package org.example.commonlibrary;
 
 
 import org.springframework.boot.SpringApplication;
@@ -7,8 +7,8 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 @SpringBootApplication
 @EnableEurekaServer
-public class EurekaServerApplication {
+public class CommonLibraryApplication {
     public static void main(String[] args) {
-            SpringApplication.run(EurekaServerApplication.class, args);
+      SpringApplication.run(CommonLibraryApplication.class, args);
         }
     }
