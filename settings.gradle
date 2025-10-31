@@ -1,2 +1,2 @@
-rootProject.name = 'auth-service'
+rootProject.name = 'SkillSwap'
 include 'api-gateway', 'user-service', 'auth-service', 'eureka-server', 'common-library'

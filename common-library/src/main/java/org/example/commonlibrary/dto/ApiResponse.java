@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Builder
-
 public class ApiResponse<T> {
    private String message;
    private  int status;
