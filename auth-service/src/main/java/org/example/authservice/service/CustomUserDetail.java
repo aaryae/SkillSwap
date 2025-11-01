@@ -1,6 +1,8 @@
 package org.example.authservice.service;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import org.example.authservice.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,6 +12,8 @@ import java.util.Collection;
 import java.util.List;
 
 @Builder
+@AllArgsConstructor(access = lombok.AccessLevel.PUBLIC)
+@Getter
 public class CustomUserDetail implements UserDetails {
 
     private final User user;

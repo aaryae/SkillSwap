@@ -13,6 +13,7 @@ import org.example.authservice.helper.UserStatus;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class User {
 
     @NonNull

@@ -5,4 +5,4 @@ import lombok.Builder;
 
 
 @Builder
-public record RegisterRequest(@NotNull String email,@NotNull String password) {}
+public record RegisterRequest(@NotNull String email,@NotNull String password,@NotNull String username,@NotNull String bio,@NotNull String skillsOffered,@NotNull String profileImage ) {}

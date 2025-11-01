@@ -1,5 +1,6 @@
 package org.example.authservice.repository;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.authservice.model.User;

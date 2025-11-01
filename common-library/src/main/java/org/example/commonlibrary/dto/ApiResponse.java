@@ -1,14 +1,21 @@
 package org.example.commonlibrary.dto;
 
 
-import lombok.Builder;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Builder
+@Getter
+@Setter
+@RequiredArgsConstructor
+@AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiResponse<T> {
-   private String message;
-   private  int status;
-   private T data;
+   private final String message;
+   private final boolean success;
+   private  T data;
+
 
 }
