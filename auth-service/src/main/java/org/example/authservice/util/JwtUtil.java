@@ -49,7 +49,8 @@ public class JwtUtil{
     }
 
     public Claims extractAllClaims(String token) {
-        System.out.println(extractAllClaims(token));
+        System.out.println("This is extracted claims in JwtUtil -------------?,/.,sdf,;s"+extractAllClaims(token));
+
         return extractAllClaims(token);
     }
 
