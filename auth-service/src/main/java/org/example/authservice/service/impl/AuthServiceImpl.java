@@ -1,14 +1,13 @@
 package org.example.authservice.service.impl;
 
-import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.example.authservice.dto.request.LoginRequest;
 import org.example.authservice.dto.request.PasswordResetRequest;
 import org.example.authservice.dto.request.RefreshTokenRequest;
 import org.example.authservice.dto.request.RegisterRequest;
-import org.example.authservice.exception.CustomValidationException;
-import org.example.authservice.exception.DuplicateResourceException;
-import org.example.authservice.exception.UserNotFoundException;
+import org.example.commonlibrary.exception.CustomValidationException;
+import org.example.commonlibrary.exception.DuplicateResourceException;
+import org.example.commonlibrary.exception.UserNotFoundException;
 import org.example.authservice.model.User;
 import org.example.authservice.repository.UserRepository;
 import org.example.authservice.service.AuthService;

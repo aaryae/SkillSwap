@@ -1,6 +1,5 @@
 package org.example.authservice.controller;
 
-
 import lombok.AllArgsConstructor;
 import org.example.authservice.dto.request.LoginRequest;
 import org.example.authservice.dto.request.RegisterRequest;
@@ -19,16 +18,14 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<ApiResponse> register(@RequestBody RegisterRequest request) {
+    public ResponseEntity<ApiResponse<Void>> register(@RequestBody RegisterRequest request) {
         authService.register(request);
-        return ResponseEntity.ok(new ApiResponse("User registered successfully.", true));
+        return ResponseEntity.ok(ApiResponse.success("User registered successfully"));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<ApiResponse> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<ApiResponse<Map<String, String>>> login(@RequestBody LoginRequest request) {
         Map<String, String> tokens = authService.login(request);
-        return ResponseEntity.ok(new ApiResponse("Login successful", true, tokens));
+        return ResponseEntity.ok(ApiResponse.success("Login successful", tokens));
     }
-
-
 }

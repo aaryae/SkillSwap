@@ -1,4 +1,4 @@
-package org.example.authservice.exception;
+package org.example.commonlibrary.exception;
 
 
 public class DuplicateResourceException extends RuntimeException {
