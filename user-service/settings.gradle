@@ -1,1 +1,2 @@
 rootProject.name = 'user-service'
+include 'api-gateway', 'user-service', 'auth-service', 'eureka-server', 'common-library'
