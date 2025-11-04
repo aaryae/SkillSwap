@@ -71,7 +71,7 @@ public class ProfileRepository {
                     .stream()
                     .findFirst();
         }catch (DataAccessException e) {
-            log.error("Error finding user by id: {}", e.getMessage());
+            log.error( e.getMessage());
             return Optional.empty();
         }
         }
