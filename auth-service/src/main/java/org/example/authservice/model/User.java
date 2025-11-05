@@ -41,12 +41,13 @@ public class User {
     @Size(max = 255)
     private String skillWanted;
 
-    @NonNull
+    @Builder.Default
     private Role role=Role.USER;
 
     private String profileImage;
     private String createdAt;
     private String updatedAt;
+    @Builder.Default
     private UserStatus status=UserStatus.ACTIVE;
 
 

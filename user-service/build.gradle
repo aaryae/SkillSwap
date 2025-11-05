@@ -4,7 +4,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.1.0'
 }
 
-group = 'org.example.user-service'
+group = 'org.example'
 version = '1.0-SNAPSHOT'
 
 java {
@@ -13,22 +13,33 @@ java {
     }
 }
 
-
 repositories {
     mavenCentral()
+}
+
+ext {
+    set('springCloudVersion', "2023.0.1")
 }
 
 dependencies {
     implementation project(':common-library')
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 
-    implementation('org.springframework.boot:spring-boot-starter-jdbc')
+    // Add validation dependency
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 
     compileOnly 'org.projectlombok:lombok:1.18.32'
     annotationProcessor 'org.projectlombok:lombok:1.18.32'
-    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 test {

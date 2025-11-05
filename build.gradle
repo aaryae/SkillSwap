@@ -16,9 +16,15 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    implementation project(':common-library')
+bootJar {
+    enabled = false
+}
 
+jar {
+    enabled = false
+}
+
+dependencies {
 
 
     // ✅ Testing
