@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/profile")
@@ -26,14 +27,15 @@ public class ProfileController {
     }
 
     @GetMapping("/profile-by-id")
-    public ResponseEntity<ApiResponse<Optional<Profile>>> getProfileById(String id) {
+    public ResponseEntity<ApiResponse<Optional<Profile>>> getProfileById(UUID id) {
         return ResponseEntity.ok(new ApiResponse<>("Succesfully fetched data",true,profileService.getProfileById(id)));
     }
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<ApiResponse<Optional<Profile>>> getProfile() {
         return ResponseEntity.ok(new ApiResponse<>("Succesfully fetched data",true,profileService.getProfile()));
     }
+
 
 
 }

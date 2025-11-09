@@ -4,8 +4,8 @@ public final class ProfileSql {
 
     private ProfileSql() {}
 
-    public static final String  SAVE_PROFILE = """
-            INSERT INTO profile (userName, fullName,bio, skillsOffered, skillsWanted, profileImageUrl) VALUES (?,?,?,?,?,?)
+    public static final String  CREATE_PROFILE = """
+            INSERT INTO profile (email, fullName,bio, skillsOffered, skillsWanted) VALUES (?,?,?,?,?,?)
             """;
 
     public static final String GET_USER_PROFILE_BY_ID = """
@@ -17,6 +17,7 @@ public final class ProfileSql {
     """;
 
     public static final String  GET_USER_PROFILE="SELECT * FROM  profile";
+
 
 
 

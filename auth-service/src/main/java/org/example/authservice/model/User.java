@@ -7,7 +7,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.example.authservice.helper.Role;
-import org.example.authservice.helper.UserStatus;
+
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -17,7 +18,7 @@ import org.example.authservice.helper.UserStatus;
 public class User {
 
     @NonNull
-    private  String id;
+    private UUID id;
 
     @Email(message="invalid email format")
     @NotBlank(message = "email is required")
@@ -32,23 +33,12 @@ public class User {
     @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
     private String username;
 
-    @Size(max = 255)
-    private String bio;
-
-    @Size(max = 255)
-    private String skillsOffered;
-
-    @Size(max = 255)
-    private String skillWanted;
-
     @Builder.Default
     private Role role=Role.USER;
 
     private String profileImage;
     private String createdAt;
     private String updatedAt;
-    @Builder.Default
-    private UserStatus status=UserStatus.ACTIVE;
 
 
 

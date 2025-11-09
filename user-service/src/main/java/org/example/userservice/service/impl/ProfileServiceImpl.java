@@ -1,17 +1,25 @@
 package org.example.userservice.service.impl;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.example.userservice.dto.CreateProfileRequest;
 import org.example.userservice.model.Profile;
 import org.example.userservice.repository.ProfileRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 
+import jakarta.validation.Valid;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
+@Slf4j
+@Validated
 public class ProfileServiceImpl implements ProfileService {
-    private final ProfileRepository profileRepository;
 
+    private final ProfileRepository profileRepository;
 
     @Override
     public Optional<Profile> getProfile() {
@@ -24,7 +32,37 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public Optional<Profile> getProfileById(String id) {
+    public Optional<Profile> getProfileById(UUID id) {
         return profileRepository.findById(id);
+    }
+
+    /**
+     * Creates a profile.
+     * Throws ProfileAlreadyExistsException if email is already taken.
+     */
+    @Override
+    @Transactional
+    public Profile createProfile(@Valid CreateProfileRequest request) {
+        // 1) validate uniqueness
+        profileRepository.findByEmail(request.getEmail()).ifPresent(existing -> {
+            log.warn("Attempt to create profile with email already in use: {}", request.getEmail());
+            throw new RuntimeException("Profile with email already exists: " + request.getEmail());
+        });
+
+        // 2) build entity (generate UUID here)
+        UUID id = UUID.randomUUID();
+        Profile profile = new Profile();
+        profile.setId(id);
+        profile.setEmail(request.getEmail());
+        profile.setBio(request.getBio());
+        profile.setSkillsOffered(request.getSkillsOffered());
+        profile.setSkillsWanted(request.getSkillsWanted());
+
+        // 3) persist (repository handles insert)
+        profileRepository.save(profile); // ensure your repository provides save(...) or insert(...)
+        log.info("Created profile with id={} email={}", id, request.getEmail());
+
+        // 4) return created profile (or convert to DTO)
+        return profile;
     }
 }

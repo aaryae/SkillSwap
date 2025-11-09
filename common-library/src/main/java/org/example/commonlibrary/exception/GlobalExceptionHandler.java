@@ -44,4 +44,11 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(ApiResponse.error("An unexpected error occurred: " + e.getMessage()));
     }
+
+    @ExceptionHandler(DataNotFoundException.class)
+    public ResponseEntity<ApiResponse<Void>> handleDataNotFoundException(DataNotFoundException e) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ApiResponse.error(e.getMessage()));
+    }
 }

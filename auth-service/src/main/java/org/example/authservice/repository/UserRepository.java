@@ -32,12 +32,8 @@ public class UserRepository {
                         ps.setString(1, user.getEmail());
                         ps.setString(2, user.getPassword());
                         ps.setString(3, user.getUsername());
-                        ps.setString(4, user.getBio());
-                        ps.setString(5, user.getSkillsOffered());
-                        ps.setString(6, user.getSkillWanted());
                         ps.setString(7, user.getRole().toString());
                         ps.setString(8, user.getProfileImage());
-                        ps.setString(9, String.valueOf(user.getStatus()));
                 return ps;
                     }
                     , keyHolder);
@@ -78,9 +74,6 @@ public class UserRepository {
         try {
             return jdbcTemplate.update(UserSql.UPDATE_USER,
                     user.getUsername(),
-                    user.getBio(),
-                    user.getSkillsOffered(),
-                    user.getSkillWanted(),
                     user.getProfileImage(),
                     user.getId());
         } catch (DataAccessException e) {

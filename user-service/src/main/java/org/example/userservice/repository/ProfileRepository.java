@@ -2,9 +2,11 @@ package org.example.userservice.repository;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.commonlibrary.exception.DataNotFoundException;
 import org.example.userservice.model.Profile;
 import org.example.userservice.repository.mapper.ProfileMapper;
 import org.example.userservice.repository.sql.ProfileSql;
+import org.springframework.boot.context.config.ConfigDataNotFoundException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Optional;
+import java.util.UUID;
 
 @Slf4j
 @Repository
@@ -21,26 +24,24 @@ import java.util.Optional;
 public class ProfileRepository {
     private final JdbcTemplate jdbcTemplate;
 
-    public String save(Profile profile) {
+    public String save(Profile profile)  {
         try {
             KeyHolder keyHolder = new GeneratedKeyHolder();
             jdbcTemplate.update(connection-> {
-                PreparedStatement ps = connection.prepareStatement(ProfileSql.SAVE_PROFILE, Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement ps = connection.prepareStatement(ProfileSql.CREATE_PROFILE, Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1, profile.getEmail());
-                ps.setString(2,profile.getUserName());
                 ps.setString (3, profile.getFullName());
                 ps.setString(4, profile.getBio());
                 ps.setString(5, profile.getSkillsOffered());
                 ps.setString(6, profile.getSkillsWanted());
-                ps.setString(8, profile.getProfileImageUrl());
                 return ps;
             },keyHolder);
             return keyHolder.getKey().toString();
             }
         catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            log.error("Error saving profile {}", e.getMessage());
         }
+        return "";
     }
 
     public Optional<Profile> findByEmail(String email) {
@@ -49,12 +50,12 @@ public class ProfileRepository {
                     .stream()
                     .findFirst();
         } catch (DataAccessException e) {
-            log.error("Error finding user by email: {}", e.getMessage());
+            log.error("Error finding user by email {} ", e.getMessage());
             return Optional.empty();
         }
     }
 
-    public Optional<Profile> findById(String id) {
+    public Optional<Profile> findById(UUID id) {
         try{
             return jdbcTemplate.query(ProfileSql.GET_USER_PROFILE_BY_ID,new Object[]{id}, new ProfileMapper())
                     .stream()
@@ -74,6 +75,17 @@ public class ProfileRepository {
             log.error( e.getMessage());
             return Optional.empty();
         }
+        }
+
+
+        public Optional<Profile> createProfile(){
+        try{
+
+        } catch (DataAccessException e) {
+        log.error( e.getMessage());
+        return Optional.empty();
+    }
+            return Optional.empty();
         }
 
 }
