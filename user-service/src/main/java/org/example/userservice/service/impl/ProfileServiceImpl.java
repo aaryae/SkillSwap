@@ -36,20 +36,14 @@ public class ProfileServiceImpl implements ProfileService {
         return profileRepository.findById(id);
     }
 
-    /**
-     * Creates a profile.
-     * Throws ProfileAlreadyExistsException if email is already taken.
-     */
     @Override
     @Transactional
     public Profile createProfile(@Valid CreateProfileRequest request) {
-        // 1) validate uniqueness
         profileRepository.findByEmail(request.getEmail()).ifPresent(existing -> {
             log.warn("Attempt to create profile with email already in use: {}", request.getEmail());
             throw new RuntimeException("Profile with email already exists: " + request.getEmail());
         });
 
-        // 2) build entity (generate UUID here)
         UUID id = UUID.randomUUID();
         Profile profile = new Profile();
         profile.setId(id);
@@ -58,11 +52,13 @@ public class ProfileServiceImpl implements ProfileService {
         profile.setSkillsOffered(request.getSkillsOffered());
         profile.setSkillsWanted(request.getSkillsWanted());
 
-        // 3) persist (repository handles insert)
-        profileRepository.save(profile); // ensure your repository provides save(...) or insert(...)
+        profileRepository.save(profile);
         log.info("Created profile with id={} email={}", id, request.getEmail());
 
-        // 4) return created profile (or convert to DTO)
+
         return profile;
     }
+
+
+
 }

@@ -1,10 +1,9 @@
 package org.example.authservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.example.authservice.dto.request.LoginRequest;
-import org.example.authservice.dto.request.PasswordResetRequest;
-import org.example.authservice.dto.request.RefreshTokenRequest;
-import org.example.authservice.dto.request.RegisterRequest;
+import lombok.extern.slf4j.Slf4j;
+import org.example.authservice.dto.request.*;
+import org.example.authservice.service.UserClient;
 import org.example.commonlibrary.exception.CustomValidationException;
 import org.example.commonlibrary.exception.DuplicateResourceException;
 import org.example.commonlibrary.exception.UserNotFoundException;
@@ -15,11 +14,13 @@ import org.example.authservice.service.CustomUserDetail;
 import org.example.authservice.util.JwtUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
@@ -27,6 +28,9 @@ public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
+    private final UserClient userClient;
+
+
 
     @Override
     public void register(RegisterRequest request) {
@@ -38,13 +42,16 @@ public class AuthServiceImpl implements AuthService {
                 .username(request.email())
                 .password(passwordEncoder.encode(request.password()))
                 .email(request.email())
-                .bio(request.bio())
                 .profileImage(request.profileImage())
-                .skillsOffered(request.skillsOffered())
-                .skillWanted(request.skillsOffered())
                 .build();
 
         userRepository.save(user);
+
+        CreateProfileRequest profileRequest = new CreateProfileRequest();
+        userClient.createUserProfile(profileRequest);
+
+        log.info(" Sent request to User Service for profile creation: {}", user.getEmail());
+
 
     }
 

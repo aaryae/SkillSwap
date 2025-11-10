@@ -6,9 +6,7 @@ import org.example.commonlibrary.dto.ApiResponse;
 import org.example.userservice.model.Profile;
 import org.example.userservice.service.impl.ProfileService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -36,6 +34,10 @@ public class ProfileController {
         return ResponseEntity.ok(new ApiResponse<>("Succesfully fetched data",true,profileService.getProfile()));
     }
 
+    @PostMapping
+    public ResponseEntity<ApiResponse<Optional<Profile>>> createProfile(@RequestBody Profile profile) {
+        return ResponseEntity.ok(new ApiResponse<>("profile created successfully",true));
+    }
 
 
 }

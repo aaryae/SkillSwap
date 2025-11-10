@@ -15,7 +15,7 @@ import java.util.UUID;
 @Builder
 public class Profile {
 
-    private String profileId;
+    private UUID profileId;
 
     private UUID id;
 

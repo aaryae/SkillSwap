@@ -2,11 +2,9 @@ package org.example.userservice.repository;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.commonlibrary.exception.DataNotFoundException;
 import org.example.userservice.model.Profile;
 import org.example.userservice.repository.mapper.ProfileMapper;
 import org.example.userservice.repository.sql.ProfileSql;
-import org.springframework.boot.context.config.ConfigDataNotFoundException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
