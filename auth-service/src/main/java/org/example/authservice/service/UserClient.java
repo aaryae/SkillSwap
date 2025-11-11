@@ -26,9 +26,9 @@ public class UserClient {
                     .retrieve()
                     .body(String.class);
 
-            log.info("✅ Profile created successfully for {} | Response: {}", request.getEmail(), response);
+            log.info(" Profile created successfully for {} | Response: {}", request.getEmail(), response);
         } catch (Exception e) {
-            log.error("❌ Failed to create profile for {} | Reason: {}", request.getEmail(), e.getMessage());
+            log.error("Failed to create profile for {} | Reason: {}", request.getEmail(), e.getMessage());
         }
     }
 
