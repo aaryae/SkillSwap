@@ -1,9 +1,9 @@
 server:
-  port: 8761 #this is where our code runs
+  port: 8761 #
 
 spring:
   application:
-    name: eureka-server # name of our application
+    name: eureka-server
 
 eureka:
   client:
