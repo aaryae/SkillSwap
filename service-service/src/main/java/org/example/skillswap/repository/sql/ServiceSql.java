@@ -1,10 +1,31 @@
 package org.example.skillswap.repository.sql;
 
-public final  class ServiceSql {
+public class ServiceSql {
 
+    public static final String INSERT_SERVICE = """
+        INSERT INTO services (id, title, description, category, price, provider_email)
+        VALUES (?, ?, ?, ?, ?, ?)
+    """;
 
-    private ServiceSql(){}
+    public static final String SELECT_ALL = """
+        SELECT * FROM services ORDER BY created_at DESC
+    """;
 
-    public static final String SELECT_SERVICE="SELECT * from Service";
-    public static final String SELECT_SERVICE_BY_ID="SELECT * from Service where id=?";
+    public static final String SELECT_BY_ID = """
+        SELECT * FROM services WHERE id = ?
+    """;
+
+    public static final String SELECT_BY_PROVIDER_EMAIL = """
+        SELECT * FROM services WHERE provider_email = ?
+    """;
+
+    public static final String UPDATE_SERVICE = """
+        UPDATE services 
+        SET title = ?, description = ?, category = ?, price = ?, updated_at = NOW()
+        WHERE id = ?
+    """;
+
+    public static final String DELETE_SERVICE = """
+        DELETE FROM services WHERE id = ?
+    """;
 }
