@@ -1,8 +1,8 @@
 package org.example.skillswap.repository.sql;
 
-public class ServiceSql {
+public class SkillSql {
 
-    public static final String INSERT_SERVICE = """
+    public static final String INSERT_SKILL = """
         INSERT INTO services (id, title, description, category, price, provider_email)
         VALUES (?, ?, ?, ?, ?, ?)
     """;
@@ -19,13 +19,13 @@ public class ServiceSql {
         SELECT * FROM services WHERE provider_email = ?
     """;
 
-    public static final String UPDATE_SERVICE = """
+    public static final String UPDATE_SKILL = """
         UPDATE services 
         SET title = ?, description = ?, category = ?, price = ?, updated_at = NOW()
         WHERE id = ?
     """;
 
-    public static final String DELETE_SERVICE = """
+    public static final String DELETE_SKILL = """
         DELETE FROM services WHERE id = ?
     """;
 }

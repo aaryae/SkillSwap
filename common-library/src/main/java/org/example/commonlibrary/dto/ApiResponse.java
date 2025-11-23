@@ -1,17 +1,9 @@
 package org.example.commonlibrary.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
-@Getter
-@AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ApiResponse<T> {
-    private final String message;
-    private final boolean success;
-    private final T data;
-
+public record ApiResponse<T>(String message, boolean success, T data) {
     public ApiResponse(String message, boolean success) {
         this(message, success, null);
     }
