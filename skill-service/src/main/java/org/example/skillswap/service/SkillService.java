@@ -12,5 +12,6 @@ public interface SkillService {
     void addSkill(String userEmail, SkillRequest request);
     List<SkillResponse> getAllSkills();
     List<SkillResponse> getUserSkillsById(UUID id);
-     Boolean deleteSkill(UUID id);
+    Boolean deleteSkill(UUID id);
+    Boolean updateSkill(UUID id, SkillRequest request);
 }
