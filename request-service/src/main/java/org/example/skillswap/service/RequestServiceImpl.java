@@ -2,6 +2,8 @@ package org.example.skillswap.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.commonlibrary.exception.CustomIllegalArgumentException;
+import org.example.commonlibrary.exception.RequestNotFoundException;
 import org.example.skillswap.dto.request.CreateRequest;
 import org.example.skillswap.dto.response.RequestResponse;
 import org.example.skillswap.model.Request;
@@ -41,7 +43,7 @@ public class RequestServiceImpl implements RequestService {
                 });
 
         if (providerEmail.equals(requesterEmail)) {
-            throw new IllegalArgumentException("You cannot request your own skill");
+            throw new CustomIllegalArgumentException("You cannot request your own skill");
         }
 
         // 3. Build domain object
@@ -66,8 +68,7 @@ public class RequestServiceImpl implements RequestService {
 
         if (updated == 0) {
             log.warn("[RequestService] No request found with id={}", requestId);
-//            throw new RequestNotFoundException("Request not found");
-            throw new RuntimeException("No request found with id=" + requestId);
+            throw new RequestNotFoundException("Request not found");
         }
 
         log.info("[RequestService] Status updated for id={} → {}", requestId, status);
@@ -77,7 +78,7 @@ public class RequestServiceImpl implements RequestService {
     public List<RequestResponse> getMyRequests(String requesterEmail) {
 
         if (requesterEmail == null || requesterEmail.isBlank()) {
-            throw new IllegalArgumentException("Requester email cannot be null or empty");
+            throw new CustomIllegalArgumentException("Requester email cannot be null or empty");
         }
 
         List<RequestResponse> results = repository.findByRequester(requesterEmail);
@@ -97,7 +98,7 @@ public class RequestServiceImpl implements RequestService {
     public List<RequestResponse> getRequestsForMe(String providerEmail) {
 
         if (providerEmail == null || providerEmail.isBlank()) {
-            throw new IllegalArgumentException("Provider email cannot be null or empty");
+            throw new CustomIllegalArgumentException("Provider email cannot be null or empty");
         }
 
         List<RequestResponse> results = repository.findByProvider(providerEmail);
@@ -118,11 +119,11 @@ public class RequestServiceImpl implements RequestService {
 
     private void validateCreateRequest(CreateRequest request) {
         if (request.skillId() == null) {
-            throw new IllegalArgumentException("Skill ID cannot be null");
+            throw new CustomIllegalArgumentException("Skill ID cannot be null");
         }
 
         if (request.message() != null && request.message().length() > 500) {
-            throw new IllegalArgumentException("Message exceeds limit (max 500 chars)");
+            throw new CustomIllegalArgumentException("Message exceeds limit (max 500 chars)");
         }
     }
 

@@ -51,4 +51,18 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.NOT_FOUND)
                 .body(ApiResponse.error(e.getMessage()));
     }
+
+    @ExceptionHandler(CustomIllegalArgumentException.class)
+    public ResponseEntity<ApiResponse<Void>> handleCustomIllegalArgumentException(CustomIllegalArgumentException e) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(ApiResponse.error(e.getMessage()));
+    }
+
+    @ExceptionHandler(RequestNotFoundException.class)
+    public ResponseEntity<ApiResponse<Void>> handleRequestNotFoundException(RequestNotFoundException e) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ApiResponse.error(e.getMessage()));
+    }
 }
