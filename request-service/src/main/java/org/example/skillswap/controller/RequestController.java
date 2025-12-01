@@ -2,6 +2,7 @@ package org.example.skillswap.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.example.commonlibrary.dto.ApiResponse;
 import org.example.skillswap.dto.request.CreateRequest;
 import org.example.skillswap.dto.request.UpdateRequest;
 import org.example.skillswap.dto.response.RequestResponse;
@@ -20,13 +21,13 @@ public class RequestController {
     private final RequestService requestService;
 
     @PostMapping
-    public ResponseEntity<String> createRequest(
+    public ResponseEntity<ApiResponse<String>> createRequest(
             @RequestBody CreateRequest request,
             HttpServletRequest httpRequest) {
 
         String requester = httpRequest.getHeader("X-User-Email");
         requestService.createRequest(requester, request);
-        return ResponseEntity.ok("Request sent successfully.");
+        return ResponseEntity.ok(ApiResponse.success("Successfully fetched data"));
     }
 
     @GetMapping("/sent")
