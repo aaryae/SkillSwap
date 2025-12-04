@@ -11,10 +11,7 @@ import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 public class RedisConfig {
 
     @Bean
-    public RedisMessageListenerContainer container(
-            RedisConnectionFactory factory,
-            RedisSubscriber subscriber) {
-
+    public RedisMessageListenerContainer container( RedisConnectionFactory factory,  RedisSubscriber subscriber) {
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(factory);
         container.addMessageListener(subscriber, new ChannelTopic("chat"));
