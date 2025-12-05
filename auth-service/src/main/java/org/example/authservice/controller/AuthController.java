@@ -2,6 +2,7 @@ package org.example.authservice.controller;
 
 import lombok.AllArgsConstructor;
 import org.example.authservice.dto.request.LoginRequest;
+import org.example.authservice.dto.request.RefreshTokenRequest;
 import org.example.authservice.dto.request.RegisterRequest;
 import org.example.authservice.service.AuthService;
 import org.example.commonlibrary.dto.ApiResponse;
@@ -28,4 +29,11 @@ public class AuthController {
         Map<String, String> tokens = authService.login(request);
         return ResponseEntity.ok(ApiResponse.success("Login successful", tokens));
     }
+
+    @GetMapping("/refreshToken")
+    public ResponseEntity<ApiResponse<Map<String, String>>> refreshToken(RefreshTokenRequest request) {
+        Map<String, String> tokens = authService.refreshToken(request);
+        return ResponseEntity.ok(ApiResponse.success("Refresh token successful", tokens));
+    }
+
 }
