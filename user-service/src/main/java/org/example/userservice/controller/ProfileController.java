@@ -39,8 +39,7 @@ public class ProfileController {
         return ResponseEntity.ok(new ApiResponse<>("profile created successfully",true));
     }
 
-    @GetMapping        return Optional.empty();
-
+    @GetMapping
     public ResponseEntity<ApiResponse<Optional<Profile>>> getSkillsWanted(UUID id){
         return ResponseEntity.ok(new ApiResponse<>("skill fetched successfully",true));
     }
