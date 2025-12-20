@@ -14,6 +14,6 @@ public class WebSocketController {
 
     @MessageMapping("/chat.send")
     public void send(ChatMessage message) {
-        messageService.publish(message); // publish to Redis
+        messageService.publish(message);
     }
 }

@@ -3,6 +3,7 @@ package org.example.skillswap.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.example.skillswap.dto.SkillRequest;
 import org.example.skillswap.dto.SkillResponse;
 import org.example.skillswap.service.SkillService;
@@ -13,13 +14,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/skills")
+@RequiredArgsConstructor
 public class SkillController {
 
     private final SkillService skillService;
-
-    public SkillController(SkillService skillService) {
-        this.skillService = skillService;
-    }
 
     @PostMapping
     public ResponseEntity<String> addSkill(@Valid @RequestBody SkillRequest request, HttpServletRequest httpRequest) {

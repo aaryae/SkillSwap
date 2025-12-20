@@ -86,4 +86,17 @@ public class ProfileRepository {
             return Optional.empty();
         }
 
+
+        public Optional<Profile> findAllSkillsWanted(UUID id){
+        try{
+            return jdbcTemplate.query(ProfileSql.GET_SKILL_WANTED,new Object[]{id},new ProfileMapper())
+                    .stream()
+                    .findFirst();
+        }
+        catch(DataAccessException e){
+            log.error(e.getMessage());
+            return Optional.empty();
+        }
+        }
+
 }

@@ -4,7 +4,7 @@ package org.example.userservice.controller;
 import lombok.AllArgsConstructor;
 import org.example.commonlibrary.dto.ApiResponse;
 import org.example.userservice.model.Profile;
-import org.example.userservice.service.impl.ProfileService;
+import org.example.userservice.service.ProfileService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,6 +37,12 @@ public class ProfileController {
     @PostMapping
     public ResponseEntity<ApiResponse<Optional<Profile>>> createProfile(@RequestBody Profile profile) {
         return ResponseEntity.ok(new ApiResponse<>("profile created successfully",true));
+    }
+
+    @GetMapping        return Optional.empty();
+
+    public ResponseEntity<ApiResponse<Optional<Profile>>> getSkillsWanted(UUID id){
+        return ResponseEntity.ok(new ApiResponse<>("skill fetched successfully",true));
     }
 
 

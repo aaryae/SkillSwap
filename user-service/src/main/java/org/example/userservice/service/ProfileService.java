@@ -1,4 +1,4 @@
-package org.example.userservice.service.impl;
+package org.example.userservice.service;
 
 import org.example.userservice.dto.CreateProfileRequest;
 import org.example.userservice.model.Profile;
@@ -12,4 +12,5 @@ public interface ProfileService {
     public Optional<Profile> getProfileByEmail(String email);
     public Optional<Profile> getProfileById(UUID id);
     public Profile createProfile( CreateProfileRequest request);
+    public Optional<Profile> getSkillsWanted(UUID id );
     }

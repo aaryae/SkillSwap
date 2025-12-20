@@ -19,6 +19,10 @@ public final class ProfileSql {
     public static final String  GET_USER_PROFILE="SELECT * FROM  profile";
 
 
+    public static final String GET_SKILL_WANTED= """
+            Select * from profile where skillsWanted:skillsWanted
+            """;
+
 
 
 }
