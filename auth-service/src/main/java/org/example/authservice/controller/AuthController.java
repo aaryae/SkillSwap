@@ -1,5 +1,6 @@
 package org.example.authservice.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.example.authservice.dto.request.LoginRequest;
 import org.example.authservice.dto.request.PasswordResetRequest;
@@ -48,6 +49,6 @@ public class AuthController {
     @Operation(summary = "Verify password reset code and reset password")
     public ResponseEntity<ApiResponse<Boolean>>verifyReset(@RequestBody PasswordResetRequest request) {
         authService.verifyAndResetPassword(request);
-        return ResponseEntity.ok().body(new ApiResponse("Password reset successfully.", true));
+        return ResponseEntity.ok(ApiResponse.success("Password reset successfully", true));
     }
 }

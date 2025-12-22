@@ -1,4 +1,5 @@
 rootProject.name = 'auth-service'
+
 include 'common-library'
 include 'eureka-server'
 include 'api-gateway'
