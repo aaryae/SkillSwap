@@ -6,7 +6,6 @@ import org.example.skillswap.dto.SkillWanted;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 

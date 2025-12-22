@@ -1,11 +1,14 @@
 package org.example.authservice.service.impl;
 
+import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.authservice.dto.request.*;
+import org.example.authservice.service.MailService;
 import org.example.authservice.service.UserClient;
 import org.example.commonlibrary.exception.CustomValidationException;
 import org.example.commonlibrary.exception.DuplicateResourceException;
+import org.example.commonlibrary.exception.ResourceNotFoundException;
 import org.example.commonlibrary.exception.UserNotFoundException;
 import org.example.authservice.model.User;
 import org.example.authservice.repository.UserRepository;
@@ -29,6 +32,8 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
     private final UserClient userClient;
+    private final MailService mailService;
+
 
 
 
@@ -99,12 +104,26 @@ public class AuthServiceImpl implements AuthService {
 
 
     @Override
-    public void sendResetCode(String email) {
+    public void verifyAndResetPassword(PasswordResetRequest request) {
+        User user = userRepository.findByEmail(request.email())
+                .orElseThrow(() -> new ResourceNotFoundException("User", "email", request.email()));
 
+        boolean valid = mailService.verify(request.code(), user);
+
+        if (!valid) {
+            throw new ValidationException("Invalid or expired code.");
+        }
+        user.setPassword(passwordEncoder.encode(request.newPassword()));
+        userRepository.save(user);
     }
 
     @Override
-    public void verifyAndResetPassword(PasswordResetRequest request) {
+    public void sendResetCode(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "email", email));
 
+        mailService.sendPasswordReset(user);
     }
+
+
 }

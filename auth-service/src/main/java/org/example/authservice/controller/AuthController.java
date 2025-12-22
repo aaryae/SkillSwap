@@ -2,6 +2,7 @@ package org.example.authservice.controller;
 
 import lombok.AllArgsConstructor;
 import org.example.authservice.dto.request.LoginRequest;
+import org.example.authservice.dto.request.PasswordResetRequest;
 import org.example.authservice.dto.request.RefreshTokenRequest;
 import org.example.authservice.dto.request.RegisterRequest;
 import org.example.authservice.service.AuthService;
@@ -36,4 +37,17 @@ public class AuthController {
         return ResponseEntity.ok(ApiResponse.success("Refresh token successful", tokens));
     }
 
+    @PostMapping("/request-reset")
+    @Operation(summary = "Request password reset code")
+    public ResponseEntity<ApiResponse<Boolean>> requestReset(@RequestBody LoginRequest loginRequest) {
+        authService.sendResetCode(loginRequest.email());
+        return ResponseEntity.ok(ApiResponse.success("Password reset code sent to your email.", true));
+    }
+
+    @PostMapping("/verify-reset")
+    @Operation(summary = "Verify password reset code and reset password")
+    public ResponseEntity<ApiResponse<Boolean>>verifyReset(@RequestBody PasswordResetRequest request) {
+        authService.verifyAndResetPassword(request);
+        return ResponseEntity.ok().body(new ApiResponse("Password reset successfully.", true));
+    }
 }

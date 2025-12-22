@@ -1,5 +1,5 @@
 plugins {
-    id 'java'
+    id 'java-library'
     id 'org.springframework.boot' version '3.2.5'
     id 'io.spring.dependency-management' version '1.1.0'
 }
@@ -38,6 +38,12 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.32'
 
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+
+// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.0")
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
 
     // Add configuration processor to recognize Spring properties
 //    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'

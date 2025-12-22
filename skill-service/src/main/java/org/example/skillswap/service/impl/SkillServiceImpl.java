@@ -18,8 +18,6 @@ public class SkillServiceImpl implements SkillService {
 
     private final SkillRepository skillRepository;
 
-
-
     @Override
     public void addSkill(String userEmail, SkillRequest request) {
         Skill skill = new Skill();
