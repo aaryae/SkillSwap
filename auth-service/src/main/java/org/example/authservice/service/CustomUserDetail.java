@@ -23,7 +23,7 @@ public class CustomUserDetail implements UserDetails {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
     public String getId(){
-        return user.getId();
+        return String.valueOf(user.getId());
     }
 
     @Override

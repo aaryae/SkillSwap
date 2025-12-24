@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.example.authservice.model.User;
 import org.example.authservice.repository.UserRepository;
 import org.example.authservice.service.MailService;
-import org.example.commonlibrary.exception.DuplicateResourceException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;

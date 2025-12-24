@@ -23,10 +23,15 @@ ext {
 
 dependencies {
     implementation project(':common-library')
-    api project(':common-library')
 
+    //web
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    //database
+
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
+    //security
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
