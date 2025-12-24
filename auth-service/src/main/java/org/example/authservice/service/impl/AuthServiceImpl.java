@@ -11,9 +11,7 @@ import org.example.authservice.service.CustomUserDetail;
 import org.example.authservice.service.MailService;
 import org.example.authservice.service.UserClient;
 import org.example.authservice.util.JwtUtil;
-import org.example.commonlibrary.exception.CustomValidationException;
 import org.example.commonlibrary.exception.DuplicateResourceException;
-import org.example.commonlibrary.exception.ResourceNotFoundException;
 import org.example.commonlibrary.exception.UserNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -32,6 +30,8 @@ public class AuthServiceImpl implements AuthService {
     private final JwtUtil jwtUtil;
     private final UserClient userClient;
     private final MailService mailService;
+
+
 
 
     @Override
