@@ -6,6 +6,18 @@ spring:
     username: root
     password: 'root'
     driver-class-name: com.mysql.cj.jdbc.Driver
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: mandukart770@gmail.com
+    password: "oggw wpyz eboc uaki"
+    properties:
+      mail:
+        SMTP:
+          auth: true
+          STARTTLS:
+            enable: true
+
 server:
   port: 8081
 
@@ -18,11 +30,7 @@ eureka:
   instance:
     prefer-ip-address: true
 
+springdoc:
+  swagger-ui:
+    path: /docs
 
-# Database connection configuration
-#    spring.mail.host=smtp.gmail.com
-#    spring.mail.port=587
-#    spring.mail.username=mandukart770@gmail.com
-#    spring.mail.password=oggw wpyz eboc uaki
-#    spring.mail.properties.mail.smtp.auth=true
-#    spring.mail.properties.mail.smtp.starttls.enable=true

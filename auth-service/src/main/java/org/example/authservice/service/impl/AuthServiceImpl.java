@@ -34,8 +34,6 @@ public class AuthServiceImpl implements AuthService {
     private final MailService mailService;
 
 
-
-
     @Override
     public void register(RegisterRequest request) {
         Optional<User> existingUser = userRepository.findByEmail(request.email());

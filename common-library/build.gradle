@@ -1,10 +1,8 @@
 plugins {
     id 'java-library'
-    id 'org.springframework.boot' version '3.2.5'
-    id 'io.spring.dependency-management' version '1.1.0'
 }
 
-group = 'com.skillswap.common-library'
+group = 'com.skillswap.common'
 version = '1.0.0'
 
 java {
@@ -17,25 +15,12 @@ repositories {
     mavenCentral()
 }
 
-
-
-
 dependencies {
-    api 'org.springframework.boot:spring-boot-starter-web'
-    api 'org.springframework.boot:spring-boot-starter-validation'
-    api 'org.springframework.boot:spring-boot-starter-security'
+    api 'org.springframework:spring-web'
+    api 'org.springframework:spring-context'
+    api 'org.springframework:spring-security-core'
+    api 'jakarta.validation:jakarta.validation-api'
 
     compileOnly 'org.projectlombok:lombok:1.18.32'
     annotationProcessor 'org.projectlombok:lombok:1.18.32'
-
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-
-}
-
-bootJar {
-    enabled = false
-}
-
-jar {
-    enabled = true
 }
