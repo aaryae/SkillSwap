@@ -16,10 +16,10 @@ repositories {
 }
 
 dependencies {
-    api 'org.springframework:spring-web'
-    api 'org.springframework:spring-context'
-    api 'org.springframework:spring-security-core'
-    api 'jakarta.validation:jakarta.validation-api'
+    implementation 'org.springframework:spring-web'
+    implementation 'org.springframework:spring-context'
+    implementation 'org.springframework:spring-security-core'
+    implementation 'jakarta.validation:jakarta.validation-api'
 
     compileOnly 'org.projectlombok:lombok:1.18.32'
     annotationProcessor 'org.projectlombok:lombok:1.18.32'

@@ -12,7 +12,6 @@ import org.example.authservice.service.MailService;
 import org.example.authservice.service.UserClient;
 import org.example.authservice.util.JwtUtil;
 import org.example.commonlibrary.exception.DuplicateResourceException;
-import org.example.commonlibrary.exception.UserNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +43,6 @@ public class AuthServiceImpl implements AuthService {
                 .username(request.email())
                 .password(passwordEncoder.encode(request.password()))
                 .email(request.email())
-                .profileImage(request.profileImage())
                 .build();
 
         userRepository.save(user);
@@ -60,10 +58,12 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public Map<String, String> login(LoginRequest request) {
         User user= userRepository.findByEmail(request.email())
-                .orElseThrow(()->new UserNotFoundException("Username doesn't exists","username",request.email()));
+//                .orElseThrow(()->new UserNotFoundException("Username doesn't exists","username",request.email()));
+                .orElseThrow();
 
         if (!passwordEncoder.matches(request.password(), user.getPassword())) {
-            throw new UserNotFoundException("Password incorrect","username",request.email());
+//            throw new UserNotFoundException("Password incorrect","username",request.email());
+            throw new RuntimeException();
         }
         CustomUserDetail customUserDetail = new CustomUserDetail(user);
 
@@ -82,14 +82,16 @@ public class AuthServiceImpl implements AuthService {
         String refreshToken = request.refreshToken();
 
         if (jwtUtil.isAccessToken(refreshToken)) {
-            throw new CustomValidationException("Invalid refresh token: received access token instead.");
+//            throw new CustomValidationException("Invalid refresh token: received access token instead.");
+            throw new RuntimeException();
         }
 
         String email = jwtUtil.extractAllClaims(refreshToken).getSubject();
 
 
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException("User", "email", email));
+//                .orElseThrow(() -> new UserNotFoundException("User", "email", email));
+                .orElseThrow();
 
         CustomUserDetail customUserDetail = new CustomUserDetail(user);
         String newAccessToken = jwtUtil.generateAccessToken(customUserDetail);
@@ -103,7 +105,8 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public void verifyAndResetPassword(PasswordResetRequest request) {
         User user = userRepository.findByEmail(request.email())
-                .orElseThrow(() -> new ResourceNotFoundException("User", "email", request.email()));
+//                .orElseThrow(() -> new ResourceNotFoundException("User", "email", request.email()));
+                .orElseThrow();
 
         boolean valid = mailService.verify(request.code(), user);
 
@@ -117,7 +120,8 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public void sendResetCode(String email) {
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "email", email));
+//                .orElseThrow(() -> new ResourceNotFoundException("User", "email", email));
+        .orElseThrow();
 
         mailService.sendPasswordReset(user);
     }

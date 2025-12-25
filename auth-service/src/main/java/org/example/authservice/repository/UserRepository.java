@@ -33,7 +33,6 @@ public class UserRepository {
                         ps.setString(2, user.getPassword());
                         ps.setString(3, user.getUsername());
                         ps.setString(7, user.getRole().toString());
-                        ps.setString(8, user.getProfileImage());
                 return ps;
                     }
                     , keyHolder);
@@ -74,7 +73,6 @@ public class UserRepository {
         try {
             return jdbcTemplate.update(UserSql.UPDATE_USER,
                     user.getUsername(),
-                    user.getProfileImage(),
                     user.getId());
         } catch (DataAccessException e) {
             log.error("Error updating user {}: {}", user.getId(), e.getMessage());
