@@ -22,12 +22,12 @@ ext {
 }
 
 dependencies {
-//    implementation project(':common-library')
+    implementation project(':common-library')
 
     //web
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    //database
 
+    //database
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     runtimeOnly 'com.mysql:mysql-connector-j'
 

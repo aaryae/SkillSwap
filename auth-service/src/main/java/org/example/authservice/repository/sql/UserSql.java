@@ -4,10 +4,10 @@ public final class UserSql {
 
     private UserSql(){}
 
+    // Insert user (retrieve generated ID via JDBC getGeneratedKeys)
     public static final String INSERT_USER = """
         INSERT INTO users (email, password, username, bio, skills_offered, skill_wanted, role, profile_image, status, created_at, updated_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
-        RETURNING id;
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
     """;
 
     public static final String FIND_BY_ID =
@@ -26,7 +26,3 @@ public final class UserSql {
         DELETE FROM users WHERE id = ?;
     """;
 }
-
-
-
-

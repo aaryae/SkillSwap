@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -34,7 +35,7 @@ public class ProfileRepository {
                 ps.setString(6, profile.getSkillsWanted());
                 return ps;
             },keyHolder);
-            return keyHolder.getKey().toString();
+            return Objects.requireNonNull(keyHolder.getKey()).toString();
             }
         catch (Exception e) {
             log.error("Error saving profile {}", e.getMessage());
@@ -78,12 +79,14 @@ public class ProfileRepository {
 
         public Optional<Profile> createProfile(){
         try{
-
+            return jdbcTemplate.query(ProfileSql.CREATE_PROFILE,new ProfileMapper())
+                    .stream()
+                    .findFirst();
         } catch (DataAccessException e) {
         log.error( e.getMessage());
         return Optional.empty();
     }
-            return Optional.empty();
+
         }
 
 

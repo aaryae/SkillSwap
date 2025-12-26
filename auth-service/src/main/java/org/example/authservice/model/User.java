@@ -4,6 +4,7 @@ package org.example.authservice.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.example.authservice.helper.Role;
@@ -17,7 +18,7 @@ import java.util.UUID;
 @Builder
 public class User {
 
-    @NonNull
+    @NotNull
     private UUID id;
 
     @Email(message="invalid email format")
@@ -40,7 +41,8 @@ public class User {
     private String createdAt;
     private String updatedAt;
 
-    private Integer verificationCode=null;
+    @Builder.Default
+    private Integer verificationCode = null;
 
 
 

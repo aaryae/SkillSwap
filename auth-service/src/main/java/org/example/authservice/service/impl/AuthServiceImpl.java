@@ -11,7 +11,6 @@ import org.example.authservice.service.CustomUserDetail;
 import org.example.authservice.service.MailService;
 import org.example.authservice.service.UserClient;
 import org.example.authservice.util.JwtUtil;
-import org.example.commonlibrary.exception.DuplicateResourceException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +36,8 @@ public class AuthServiceImpl implements AuthService {
     public void register(RegisterRequest request) {
         Optional<User> existingUser = userRepository.findByEmail(request.email());
         if (existingUser.isPresent()) {
-            throw new DuplicateResourceException("User already exists with email " + request.email());
+//            throw new DuplicateResourceException("User already exists with email " + request.email());
+            throw new RuntimeException("user already exists");
         }
         User user = User.builder()
                 .username(request.email())

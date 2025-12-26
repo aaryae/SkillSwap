@@ -1,29 +1,33 @@
 server:
-  port: 8080
+  port: 8091
 
 spring:
   application:
     name: api-gateway
 
-jwt:
-  secret: 239p85lkjwkj34k5jh2ds34j23l
-
   cloud:
     gateway:
       routes:
         - id: auth-service
-          uri: lb://AUTH-SERVICE
+          uri: lb://auth-service
           predicates:
             - Path=/api/auth/**
+        - id: auth-swagger
+          uri: lb://auth-service
+          predicates:
+            - Path=/swagger-ui/**, /v3/api-docs/**
         - id: user-service
-          uri: lb://USER-SERVICE
+          uri: lb://user-service
           predicates:
             - Path=/api/users/**
+
       discovery:
         locator:
           enabled: true
           lower-case-service-id: true
 
+jwt:
+  secret: 239p85lkjwkj34k5jh2ds34j23l
 
 eureka:
   client:

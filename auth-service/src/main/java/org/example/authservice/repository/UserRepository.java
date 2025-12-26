@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -36,7 +37,7 @@ public class UserRepository {
                 return ps;
                     }
                     , keyHolder);
-            return keyHolder.getKey().toString();
+            return Objects.requireNonNull(keyHolder.getKey()).toString();
         }
         catch (DataAccessException e){
             log.error(e.getMessage(),e);
@@ -57,9 +58,9 @@ public class UserRepository {
         }
     }
 
-    public Optional<User> findById(String Id) {
+    public Optional<User> findById(String id) {
         try{
-            return jdbcTemplate.query(UserSql.FIND_BY_ID, new Object[]{Id}, new UserRowMapper())
+            return jdbcTemplate.query(UserSql.FIND_BY_ID, new Object[]{id}, new UserRowMapper())
                     .stream()
                     .findFirst();
         }

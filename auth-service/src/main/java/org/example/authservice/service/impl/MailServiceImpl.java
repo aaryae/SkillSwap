@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.authservice.model.User;
 import org.example.authservice.repository.UserRepository;
 import org.example.authservice.service.MailService;
+import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -66,7 +67,7 @@ public class MailServiceImpl implements MailService {
 
             mailSender.send(message);
         } catch (Exception e) {
-            throw new DuplicateResourceException("Failed to send email");
+            throw new RuntimeException("Failed to send email");
         }
     }
 }
